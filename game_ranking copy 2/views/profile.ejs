@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Game Ranking</title>
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body id="profileBdy">
+
+
+  <header class="proHeader">
+    <h1>Gamer Rank</h1>
+  </header>
+
+
+
+  <section class="usersBox">
+
+    <section class="avatar">
+      <h3 class = "user">User</h3>
+      <span><%= user.local.name %></span>
+      <img src="<%= user.local.avatar %>" alt="item-picture">
+      <h3>+add Pic</h3>
+      <form action="/api/profile_pic" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="file" name="avatar">
+          <input hidden type="text" name="_id" value="<%= user._id %>">
+        </div>
+        <input type="submit">
+      </form>
+    </section>
+
+
+    <section class="gameOftheweek">
+      <a href="/game">Play</a>
+
+
+
+    </section>
+  </section>
+
+
+  <section class="rankingBox">
+    <h3 class = "winner">Top Winners</h3>
+    <ul>
+      <% for(var i=0; i<rankings.length; i++) {%>
+      <% var user = users.find(user => user._id + "" === rankings[i].userId + "") %>
+      <li>
+        <img src="<%= user.local.avatar %>" alt="item-picture">
+        <span><%= user.local.name %></span>
+        <span><%= rankings[i].winStreak %></span>
+      </li>
+      <% } %>
+    </ul>
+  </section>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
